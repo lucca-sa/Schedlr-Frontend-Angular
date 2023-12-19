@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.wrapper {
+    min-height: 100dvh;
+    min-width: 100dvw;
+}
+
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    padding: 20px;
+    min-width: 900px;
+    min-height: 500px;
+    border-radius: 51px;
+    background: #FAFAFA;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.task-state {
+    background: #D9D9D9;
+}
