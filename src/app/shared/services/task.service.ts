@@ -5,15 +5,15 @@ import { environment } from '../../../environments/environment.development';
 import { Task } from '../interfaces/Task';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-  
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  createTask() {}
 
   getAllTasks() {
-    return this.http.get<Task[]>(`${environment.baseApiUrl}/tasks`)
+    return this.http.get<Task[]>(`${environment.baseApiUrl}/tasks`);
   }
 
   changeTaskStatusById(taskId: number, taskStatus: string): Observable<any> {

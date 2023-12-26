@@ -2,8 +2,27 @@
   "tasks": [
     {
       "title": "please work",
-      "status": "done",
+      "status": "todo",
+      "color": "Red",
       "id": 1
+    },
+    {
+      "title": "second",
+      "status": "todo",
+      "color": "Blue",
+      "id": 2
+    },
+    {
+      "title": "FirstTask",
+      "status": "todo",
+      "color": "Green",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "name": "Jojo",
+      "email": "jhschier30@hotmail.com"
     }
   ]
 }

@@ -1,3 +1,4 @@
+<app-new-task></app-new-task>
 <div class="wrapper flex-center">
   <h2>Task Board</h2>
   <main class="board flex">
@@ -11,8 +12,18 @@
         [cdkDropListConnectedTo]="[doneList, inProgressList]"
         (cdkDropListDropped)="drop($event, 'todo')"
       >
-        <div class="task" *ngFor="let task of todo" cdkDrag>
-          {{ task.title }}
+        <div
+          class="task"
+          *ngFor="let task of todo"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
         </div>
       </div>
     </div>
@@ -26,8 +37,18 @@
         (cdkDropListDropped)="drop($event, 'inProgress')"
         [cdkDropListConnectedTo]="[todoList, doneList]"
       >
-        <div class="task" *ngFor="let task of inProgress" cdkDrag>
-          {{ task.title }}
+        <div
+          class="task"
+          *ngFor="let task of inProgress"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
         </div>
       </div>
     </div>
@@ -41,8 +62,18 @@
         [cdkDropListConnectedTo]="[todoList, inProgressList]"
         (cdkDropListDropped)="drop($event, 'done')"
       >
-        <div class="task" *ngFor="let task of done" cdkDrag>
-          {{ task.title }}
+        <div
+          class="task"
+          *ngFor="let task of done"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
         </div>
       </div>
     </div>
