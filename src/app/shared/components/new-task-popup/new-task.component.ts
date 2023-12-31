@@ -10,7 +10,7 @@ import { TaskService } from '../../services/task.service';
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.scss',
 })
-export class NewTaskComponent implements OnInit {
+export class NewTaskPopupComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
 
   createTaskForm!: FormGroup;

@@ -7,14 +7,14 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NewTaskComponent } from '../../shared/component/new-task/new-task.component';
+import { NewTaskPopupComponent } from '../../shared/components/new-task-popup/new-task.component';
 import { Task } from '../../shared/interfaces/Task';
 import { TaskService } from '../../shared/services/task.service';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CommonModule, NewTaskComponent],
+  imports: [CdkDropList, CdkDrag, CommonModule, NewTaskPopupComponent],
   templateUrl: './task-board.component.html',
   styleUrl: './task-board.component.scss',
 })

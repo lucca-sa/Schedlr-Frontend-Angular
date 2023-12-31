@@ -44,4 +44,13 @@
     padding-left: 0.2em;
     margin-bottom: 0.5rem;
     margin-left: .3rem;
-  }
+}
+
+.popup-container {
+    min-height: 250px;
+    min-width: 400px;
+    background-color: #E9E9E9;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 20px;
+}

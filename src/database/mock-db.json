@@ -8,7 +8,7 @@
     },
     {
       "title": "second",
-      "status": "inProgress",
+      "status": "todo",
       "color": "Blue",
       "id": 2
     },
@@ -20,13 +20,13 @@
     },
     {
       "title": "tomas no cu",
-      "status": "done",
+      "status": "inProgress",
       "color": "#cc510f",
       "id": 4
     },
     {
       "title": "Task doida",
-      "status": "todo",
+      "status": "done",
       "color": "#ffffff",
       "id": 5
     }
