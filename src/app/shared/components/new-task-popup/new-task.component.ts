@@ -12,6 +12,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class NewTaskPopupComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<any>();
+  @Output() closePopup = new EventEmitter<any>();
 
   createTaskForm!: FormGroup;
   
@@ -53,6 +54,6 @@ export class NewTaskPopupComponent implements OnInit {
 
 
   hideNewTaskForm() {
-    this.onSubmit.emit()
+    this.closePopup.emit()
   }
 }

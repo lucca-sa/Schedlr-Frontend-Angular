@@ -11,7 +11,6 @@ export class TaskService {
 
   createTask(taskDetails: NewTaskFromForm) {
     const body: NewTask = {title: taskDetails.taskName, status: taskDetails.taskStatus, color: taskDetails.taskColor}
-    console.log(body)
     return this.http.post<Task>(`${environment.baseApiUrl}/tasks`, body)
   }
 
@@ -29,4 +28,10 @@ export class TaskService {
 
     return this.http.patch(url, body);
   }
+
+  deleteTaskById(taskId: number) {
+    const url = `${environment.baseApiUrl}/tasks/${taskId}`;
+    return this.http.delete(url);
+  }
+  
 }

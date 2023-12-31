@@ -1,1 +1,8 @@
-<p>delete-task-popup works!</p>
+<div class="popup-container flex">
+  <button (click)="hideDeleteTaskPopup()" id="x" class="flex-center">X</button>
+  <h3>Are you sure you want to delete the task?</h3>
+  <div class="button-divs flex">
+    <button (click)="deleteTask()">Delete</button>
+    <button (click)="hideDeleteTaskPopup()">Cancel</button>
+  </div>
+</div>

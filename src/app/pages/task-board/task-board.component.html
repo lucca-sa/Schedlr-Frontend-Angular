@@ -1,4 +1,16 @@
-<app-new-task *ngIf="isNewTaskFormVisible" (onSubmit)="handleFormSubmission()" class="new-task"></app-new-task>
+<app-delete-task-popup
+  *ngIf="isDeleteTaskPopupVisible"
+  (refreshTasks)="refreshTasks()"
+  (closeDeletePopup)="hideDeleteTaskPopup()"
+  [taskId]="taskToDeleteId"
+  class="mid-screen-popup delete-task-popup"
+></app-delete-task-popup>
+<app-new-task
+  *ngIf="isNewTaskPopupVisible"
+  (closePopup)="hideNewTaskPopup()"
+  (onSubmit)="handleFormSubmission()"
+  class="mid-screen-popup new-task-popup"
+></app-new-task>
 
 <div class="wrapper flex-center">
   <h2>Task Board</h2>
@@ -10,7 +22,7 @@
       <h4>To Do</h4>
       <div
         class="task-state flex"
-        cdkDropList 
+        cdkDropList
         #todoList="cdkDropList"
         [cdkDropListData]="todo"
         [cdkDropListConnectedTo]="[doneList, inProgressList]"
@@ -24,6 +36,9 @@
         >
           <p>Task Name:</p>
           <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
           <div
             [ngStyle]="{ 'background-color': task.color }"
             class="task-color"
@@ -49,6 +64,9 @@
         >
           <p>Task Name:</p>
           <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
           <div
             [ngStyle]="{ 'background-color': task.color }"
             class="task-color"
@@ -74,6 +92,9 @@
         >
           <p>Task Name:</p>
           <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
           <div
             [ngStyle]="{ 'background-color': task.color }"
             class="task-color"

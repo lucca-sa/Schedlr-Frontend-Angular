@@ -1,36 +1,5 @@
 {
-  "tasks": [
-    {
-      "title": "please work",
-      "status": "done",
-      "color": "Red",
-      "id": 1
-    },
-    {
-      "title": "second",
-      "status": "todo",
-      "color": "Blue",
-      "id": 2
-    },
-    {
-      "title": "Task doida",
-      "status": "todo",
-      "color": "#14f04b",
-      "id": 3
-    },
-    {
-      "title": "tomas no cu",
-      "status": "inProgress",
-      "color": "#cc510f",
-      "id": 4
-    },
-    {
-      "title": "Task doida",
-      "status": "done",
-      "color": "#ffffff",
-      "id": 5
-    }
-  ],
+  "tasks": [],
   "users": [
     {
       "name": "Jojo",
