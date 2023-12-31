@@ -1,0 +1,94 @@
+<div class="popup-container">
+  <button (click)="hideNewTaskForm()" id="x" class="flex-center">X</button>
+  <div class="newTask">
+    <form
+      class="newtask-form flex"
+      (ngSubmit)="createNewTask()"
+      [formGroup]="createTaskForm"
+      #formDir="ngForm"
+    >
+      <div class="form-group flex">
+        <label for="taskName">Task Name:</label>
+        <input
+          formControlName="taskName"
+          type="text"
+          id="taskName"
+          placeholder="Type Here The Task Name"
+          [ngStyle]="{
+            border:
+              (taskNameControl.invalid && formDir.submitted) ||
+              (taskNameControl.invalid && taskNameControl.touched)
+                ? '1px solid red'
+                : '1px solid #000'
+          }"
+        />
+        <div
+          [ngStyle]="{
+            visibility:
+              taskNameControl.invalid &&
+              (formDir.submitted || taskNameControl.touched)
+                ? 'visible'
+                : 'hidden'
+          }"
+          class="validation-error"
+        >
+          <p
+            [ngStyle]="{
+              visibility:
+                taskNameControl.invalid &&
+                (formDir.submitted || taskNameControl.touched)
+                  ? 'visible'
+                  : 'hidden'
+            }"
+          >
+            Title is required
+          </p>
+        </div>
+      </div>
+      <div class="form-group flex">
+        <label for="taskStatus">Task Status:</label>
+        <select
+          formControlName="taskStatus"
+          name="Task Status"
+          id="taskStatus"
+          [ngStyle]="{
+            border:
+              (taskStatusControl.invalid && formDir.submitted) ||
+              (taskStatusControl.invalid && taskNameControl.touched)
+                ? '1px solid red'
+                : '1px solid #000'
+          }"
+        >
+          <option value="">Select Status</option>
+          <option value="todo">To Do</option>
+          <option value="inProgress">In Progress</option>
+        </select>
+        <div
+          [ngStyle]="{
+            visibility:
+              taskStatusControl.invalid && formDir.submitted
+                ? 'visible'
+                : 'hidden'
+          }"
+          class="validation-error"
+        >
+          <p
+            [ngStyle]="{
+              visibility:
+                taskStatusControl.invalid && formDir.submitted
+                  ? 'visible'
+                  : 'hidden'
+            }"
+          >
+            Status is required
+          </p>
+        </div>
+      </div>
+      <div class="form-group flex">
+        <label for="color">Task Color:</label>
+        <input formControlName="taskColor" type="color" id="color" />
+      </div>
+      <button type="submit">Create Task</button>
+    </form>
+  </div>
+</div>

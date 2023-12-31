@@ -1,0 +1,31 @@
+
+
+.newtask-form {
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 3px;
+    font-weight: 400;
+}
+
+.form-group {
+    flex-direction: column;
+}
+
+input, select {
+    border-radius: 10px;
+    border: 1px solid #000;
+    outline: none;
+}
+
+input[type=color] {
+    width: 100%;
+    border: none;
+}
+
+input[type=text], select {
+    padding-left: 10px;
+    height: 30px;
+}

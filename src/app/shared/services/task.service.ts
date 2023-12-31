@@ -1,25 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { Task } from '../interfaces/Task';
+import { NewTask, NewTaskFromForm, Task } from '../interfaces/Task';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-  
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getAllTasks() {
-    return this.http.get<Task[]>(`${environment.baseApiUrl}/tasks`)
+  createTask(taskDetails: NewTaskFromForm) {
+    const body: NewTask = {title: taskDetails.taskName, status: taskDetails.taskStatus, color: taskDetails.taskColor}
+    return this.http.post<Task>(`${environment.baseApiUrl}/tasks`, body)
   }
 
-  changeTaskStatusById(taskId: number, taskStatus: string): Observable<any> {
+  getAllTasks() {
+    return this.http.get<Task[]>(`${environment.baseApiUrl}/tasks`);
+  }
+
+  getTasksByStatus(taskStatus: string){
+    return this.http.get<Task[]>(`${environment.baseApiUrl}/tasks?status=${taskStatus}`)
+  }
+
+  changeTaskStatusById(taskId: number, taskStatus: string){
     const url = `${environment.baseApiUrl}/tasks/${taskId}`;
     const body = { status: `${taskStatus}` };
 
     return this.http.patch(url, body);
   }
+
+  deleteTaskById(taskId: number) {
+    const url = `${environment.baseApiUrl}/tasks/${taskId}`;
+    return this.http.delete(url);
+  }
+  
 }

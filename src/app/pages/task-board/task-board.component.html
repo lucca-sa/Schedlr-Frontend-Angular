@@ -1,0 +1,106 @@
+<app-delete-task-popup
+  *ngIf="isDeleteTaskPopupVisible"
+  (refreshTasks)="refreshTasks()"
+  (closeDeletePopup)="hideDeleteTaskPopup()"
+  [taskId]="taskToDeleteId"
+  class="mid-screen-popup delete-task-popup"
+></app-delete-task-popup>
+<app-new-task
+  *ngIf="isNewTaskPopupVisible"
+  (closePopup)="hideNewTaskPopup()"
+  (onSubmit)="handleFormSubmission()"
+  class="mid-screen-popup new-task-popup"
+></app-new-task>
+
+<div class="wrapper flex-center">
+  <h2>Task Board</h2>
+  <div class="task-buttons-div flex">
+    <button (click)="showForm()">New Task</button>
+  </div>
+  <main class="board flex">
+    <div class="state flex-center">
+      <h4>To Do</h4>
+      <div
+        class="task-state flex"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[doneList, inProgressList]"
+        (cdkDropListDropped)="drop($event, 'todo')"
+      >
+        <div
+          class="task"
+          *ngFor="let task of todo"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="state flex-center">
+      <h4>In Progress</h4>
+      <div
+        class="task-state flex"
+        cdkDropList
+        #inProgressList="cdkDropList"
+        [cdkDropListData]="inProgress"
+        (cdkDropListDropped)="drop($event, 'inProgress')"
+        [cdkDropListConnectedTo]="[todoList, doneList]"
+      >
+        <div
+          class="task"
+          *ngFor="let task of inProgress"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div class="state flex-center">
+      <h4>Done</h4>
+      <div
+        class="task-state flex"
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList, inProgressList]"
+        (cdkDropListDropped)="drop($event, 'done')"
+      >
+        <div
+          class="task"
+          *ngFor="let task of done"
+          [ngStyle]="{ 'background-color': task.color }"
+          cdkDrag
+        >
+          <p>Task Name:</p>
+          <p>{{ task.title }}</p>
+          <button class="delete-button" (click)="deleteTask(task.id)">
+            <img src="../../../assets/trash-can-icon-28689.png" />
+          </button>
+          <div
+            [ngStyle]="{ 'background-color': task.color }"
+            class="task-color"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

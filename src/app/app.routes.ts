@@ -8,6 +8,6 @@ export const routes: Routes = [
     },
     {
         path: 'task-board',
-        loadComponent: () => import('./components/task-board/task-board.component')
+        loadComponent: () => import('./pages/task-board/task-board.component')
     }
 ];

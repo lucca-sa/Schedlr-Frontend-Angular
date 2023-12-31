@@ -1,9 +1,9 @@
 {
-  "tasks": [
+  "tasks": [],
+  "users": [
     {
-      "title": "please work",
-      "status": "done",
-      "id": 1
+      "name": "Jojo",
+      "email": "jhschier30@hotmail.com"
     }
   ]
 }
