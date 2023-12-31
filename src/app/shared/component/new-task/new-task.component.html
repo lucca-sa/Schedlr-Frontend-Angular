@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="newTask">
+    <form (ngSubmit)="createNewTask()" [formGroup]="createTaskForm">
+      <label for="taskName">Task Name</label>
+      <input
+        formControlName="taskName"
+        type="text"
+        id="taskName"
+        placeholder="Task Name"
+      />
+      <label for="taskStatus">Task Status</label>
+      <select formControlName="taskStatus" name="Task Status" id="taskStatus">
+        <option value="">Select Status</option>
+        <option value="">To Do</option>
+        <option value="">In Progress</option>
+      </select>
+      <label for="color">Task Color</label>
+      <input formControlName="taskColor" type="color" id="color" />
+      <button type="submit">Create Task</button>
+    </form>
+  </div>
+</div>
