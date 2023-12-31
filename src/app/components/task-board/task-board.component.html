@@ -1,6 +1,10 @@
-<app-new-task></app-new-task>
+<app-new-task *ngIf="isNewTaskFormVisible" (onSubmit)="handleFormSubmission()" class="new-task"></app-new-task>
+
 <div class="wrapper flex-center">
   <h2>Task Board</h2>
+  <div class="task-buttons-div flex">
+    <button (click)="showForm()">New Task</button>
+  </div>
   <main class="board flex">
     <div class="state flex-center">
       <h4>To Do</h4>

@@ -1,28 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-new-task',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.scss',
 })
 export class NewTaskComponent implements OnInit {
-  createTaskForm!: FormGroup;
+  @Output() onSubmit = new EventEmitter<any>();
 
-  constructor(private formBuilder: FormBuilder) {}
+  createTaskForm!: FormGroup;
+  
+
+  taskNameControl!: AbstractControl;
+  taskStatusControl!: AbstractControl;
+  taskColorControl!: AbstractControl;
+
+  constructor(private formBuilder: FormBuilder, private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.createTaskForm = this.formBuilder.group({
       taskName: ['', [Validators.required]],
       taskStatus: ['', [Validators.required]],
-      taskColor: ['', [Validators.required]],
+      taskColor: ['#ffffff', [Validators.required]],
     });
+
+    this.taskNameControl = this.createTaskForm.get('taskName')!;
+    this.taskStatusControl = this.createTaskForm.get('taskStatus')!;
+    this.taskColorControl = this.createTaskForm.get('taskColor')!;
   }
 
   createNewTask() {
-    console.log(this.createTaskForm.value.taskColor);
+    if (this.createTaskForm.valid) {
+      this.taskService.createTask(this.createTaskForm.value).subscribe(
+        () => {
+          // Emite o evento somente após a solicitação ser concluída com sucesso
+          this.onSubmit.emit();
+        },
+        (error) => {
+          // Lida com erros, se necessário
+          console.error('Erro ao criar tarefa:', error);
+        }
+      );
+    } else {
+      console.log('Por favor, preencha todos os campos obrigatórios corretamente.');
+    }
+  }
+
+
+  hideNewTaskForm() {
+    this.onSubmit.emit()
   }
 }

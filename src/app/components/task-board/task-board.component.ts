@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-
 import {
   CdkDrag,
   CdkDragDrop,
@@ -8,9 +6,10 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { NewTaskComponent } from '../../shared/component/new-task/new-task.component';
 import { Task } from '../../shared/interfaces/Task';
 import { TaskService } from '../../shared/services/task.service';
-import { NewTaskComponent } from '../../shared/component/new-task/new-task.component';
 
 @Component({
   selector: 'app-task-board',
@@ -25,54 +24,68 @@ export default class TaskBoardComponent {
   inProgress: Task[] = [];
   done: Task[] = [];
 
+  isNewTaskFormVisible: boolean = false;
+
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.showAllTasks();
-  }
+    this.taskService.getTasksByStatus('todo').subscribe((tasks) => {
+      this.todo = tasks;
+    });
 
-  showAllTasks() {
-    this.taskService.getAllTasks().subscribe((res: any) => {
-      this.allTasks = res;
+    this.taskService.getTasksByStatus('inProgress').subscribe((tasks) => {
+      this.inProgress = tasks;
+    });
 
-      this.allTasks.forEach((task) => {
-        if (task.status === 'todo') {
-          this.todo.push(task);
-        } else if (task.status === 'inProgress') {
-          this.inProgress.push(task);
-        } else if (task.status === 'done') {
-          this.done.push(task);
-        }
-      });
+    this.taskService.getTasksByStatus('done').subscribe((tasks) => {
+      this.done = tasks;
     });
   }
 
-  drop(
-    event: CdkDragDrop<Task[]>,
-    targetStatus: 'todo' | 'inProgress' | 'done'
-  ) {
+  drop(event: CdkDragDrop<Task[]>, targetStatus: 'todo' | 'inProgress' | 'done') {
     if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      if (event.previousContainer.data && event.container.data) {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
+        );
 
-      // Atualiza o status da tarefa após mover para outra lista
-      const movedTask = event.container.data[event.currentIndex];
-      movedTask.status = targetStatus;
+        const movedTask = event.container.data[event.currentIndex];
+        movedTask.status = targetStatus;
 
-      // Chama a função para atualizar o status no servidor
-      this.taskService
-        .changeTaskStatusById(movedTask.id, targetStatus)
-        .subscribe();
+        this.taskService.changeTaskStatusById(movedTask.id, targetStatus).subscribe();
+      }
     }
+  }
+
+  
+
+  hideForm() {
+    this.isNewTaskFormVisible = false;
+  }
+
+  showForm() {
+    console.log('clico');
+    this.isNewTaskFormVisible = true;
+  }
+
+  handleFormSubmission() {
+    this.taskService.getTasksByStatus('todo').subscribe((tasks) => {
+      this.todo = tasks;
+    });
+
+    this.taskService.getTasksByStatus('inProgress').subscribe((tasks) => {
+      this.inProgress = tasks;
+    });
+
+    this.taskService.getTasksByStatus('done').subscribe((tasks) => {
+      this.done = tasks;
+    });
+
+    this.hideForm()
   }
 }
